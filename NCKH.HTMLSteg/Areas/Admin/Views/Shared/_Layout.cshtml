@@ -1,0 +1,60 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - HTML Stegano</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <link href="~/Areas/Admin/CSS/AdminLayout.css" rel="stylesheet" />
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+    <script src="~/Areas/Admin/Scripts/Common/Common.js"></script>
+    <link href=”//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css” rel=”stylesheet”>
+
+</head>
+<body>
+    <div style="display:none" class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                @Html.ActionLink("ẨN GIẤU THÔNG TIN TRONG HTML", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
+            </div>
+            <div class="nav-user-detail">
+                @{
+                    @Html.Raw((Session["AdminName"] == null) ? "Tnos" : Session["AdminName"].ToString())
+                }
+            </div>
+        </div>
+    </div>
+
+    <div class="navbar navbar-inverse navbar-fixed-top flex-center">
+        <div> @Html.ActionLink("ẨN GIẤU THÔNG TIN TRONG HTML", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })</div>
+        <div class="nav-user-detail">
+            @{
+                @Html.Raw((Session["AdminName"] == null) ? "Tnos" : Session["AdminName"].ToString())
+            }
+        </div>
+    </div>
+
+    <div class="fixed left-menu">
+        @{Html.RenderAction("Index", "Menu");}
+    </div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+        </footer>
+    </div>
+
+    
+</body>
+</html>

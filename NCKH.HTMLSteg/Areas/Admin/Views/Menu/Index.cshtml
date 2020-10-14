@@ -1,0 +1,13 @@
+﻿@using NCKH.HTMLSteg.Models.Dictionary
+@{
+    if (Model != null)
+    {
+        List<Menu> listMenu = Model;
+        <div>
+            @foreach(var menu in listMenu)
+            {
+            <a href="@menu.Link">@menu.Name</a>
+            }
+        </div>
+    }
+}

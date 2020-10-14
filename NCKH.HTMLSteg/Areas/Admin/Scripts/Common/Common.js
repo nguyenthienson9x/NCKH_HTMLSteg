@@ -1,0 +1,7 @@
+﻿function openDialog() {
+
+}
+
+function closeDialog() {
+
+}

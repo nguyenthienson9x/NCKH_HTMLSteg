@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewBag.Title = "Login";
+}
+
+<h2>Login</h2>
+<style>
+    .control-label{
+        width: 100px;
+    }
+</style>
+
+@{using (Html.BeginForm("Login", "User", FormMethod.Post))
+    {
+        <div>
+            <label class="control-label">Tài khoản</label>
+            <input name="Username" value="" class="txt-username" />
+        </div><div>
+            <label class="control-label">Mật khẩu</label>
+            <input name="Password" value="" class="txt-password" />
+        </div>
+        <button type="submit">Đăng nhập</button>
+    }
+}

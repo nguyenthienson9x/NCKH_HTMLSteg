@@ -1,0 +1,19 @@
+﻿.top-area{
+    height: 30px;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.btn-add-item {
+    height: 30px;
+    width: 100px;
+    background: #d30000;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.btn-add-item:hover{
+    cursor: pointer;
+}

@@ -1,0 +1,142 @@
+﻿
+@{
+    ViewBag.Title = "Danh sách người dùng";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+
+    List<NCKH.HTMLSteg.Models.Dictionary.XMLKey> listXML = Model.listXML;
+    List<NCKH.HTMLSteg.Models.Dictionary.User> listUser = Model.listUser;
+    List<NCKH.HTMLSteg.Models.Dictionary.ReturnPage> listHTML = Model.listHTML;
+}
+<link href="~/Areas/Admin/CSS/User.css" rel="stylesheet" />
+<h2>Quản lý thông tin người dùng</h2>
+
+<div class="flex-center top-area">
+    <div class="search-area"></div>
+    <div class="btn-add-item">
+        Thêm
+    </div>
+</div>
+
+<div class="main-content">
+    <table>
+        <thead>
+        <th>STT</th>
+        <th>Họ tên</th>
+        <th>Account</th>
+        <th>Thông điệp</th>
+        <th>Trạng thái</th>
+        <th>Action</th>
+        </thead>
+        <tbody>
+            @{
+                if (listUser != null && listUser.Count > 0)
+                {
+                    int i = 1;
+                    foreach (var user in listUser)
+                    {
+                        <tr id="@user.ID" status="@user.Status">
+                            <td>@i</td>
+                            <td>@user.FullName</td>
+                            <td>@user.Username</td>
+                            <td>@user.Message</td>
+                            <td>@{ WriteLiteral((user.Status == "Active") ? "Hoạt động" : "Không hoạt động");}</td>
+                            <td>
+                                <span class="btn-link btn-edit-item">Sửa</span>
+                                <span>&nbsp;|&nbsp;</span>
+                                <span class="btn-link btn-delete-item">Xóa</span>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+<div id="user-dialog" class="modal fade" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Thêm người dùng</h4>
+            </div>
+            <div class="modal-body" style="display:grid">
+                <input class="form-control txt-id" type="hidden" name="ID" value="" />
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6">
+                        <label class="control-label">Họ tên</label>
+                        <input class="form-control txt-full-name" type="text" name="FullName" value="" />
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                        <label class="control-label">Tên đăng nhập</label>
+                        <input class="form-control txt-username" type="text" name="Username" value="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6">
+                        <label class="control-label">Mật khẩu</label>
+                        <input class="form-control txt-password" type="password" name="Password" value="" />
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                        <label class="control-label">Xác nhận mật khẩu</label>
+                        <input class="form-control" type="password" name="RePassword" value="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <label class="control-label">Thông điệp bí mật</label>
+                        <input class="form-control txt-message" type="text" name="Message" value="" />
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-6 col-lg-6">
+                        <label class="control-label">XML</label>
+                        <select name="XMLKeyID" class="form-control ddl-xml">
+                            @foreach (var xml in listXML)
+                            {
+                                <option value="@xml.ID">@xml.KeyName</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-6 col-lg-6">
+                        <input type="checkbox" class="chk-choose-file-xml"/><label class="control-label">Tải lên file XML</label>
+                        <input name="XML" type="file" id="inp-file-XML" accept=".xml" class="form-control" disabled/>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <label class="control-label">Return Page</label>
+                        <select name="ReturnPageID" class="form-control ddl-html">
+                            @foreach (var html in listHTML)
+                            {
+                                <option value="@html.ID">@html.Name</option>
+                            }
+                        </select>
+                    </div>
+                    <div class="col-sm-12 col-lg-12">
+                        <input type="checkbox" class="chk-input-html"/><label class="control-label">Nhập nội dung HTML</label>
+                        <textarea class="form-control hide" id="inp-HTML" name="HTMLContent"></textarea>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12 col-lg-12">
+                        <label class="control-label">Trạng thái</label>
+                        <select name="Status" class="form-control ddl-status">
+                            <option value="Active">Hoạt động</option>
+                            <option value="InActive">Không Hoạt động</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" id="btn-add-user">Thêm</button>
+                <button type="button" class="btn btn-primary" id="btn-update-user">Cập nhật</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+    <script src="~/Areas/Admin/Scripts/Views/User.js"></script>
+</div>
